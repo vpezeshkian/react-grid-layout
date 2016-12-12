@@ -1,0 +1,25 @@
+1- remove build/ from gitignore
+2- in  lib/ReactGridLayout.jsx
+*line 240       w: l.w, h: l.h, x: l.x, y: l.y, placeholder: true, i: i
+to       w: l.w, h: l.h, x: x, y: y, placeholder: true, i: i
+
+*line 243 // Move the element to the dragged location.
+    layout = moveElement(layout, l, x, y, true /* isUserAction */);
+to  // layout = moveElement(layout, l, x, y, true /* isUserAction */);
+
+*line 248
+// this.setState({
+//   layout: compact(layout, this.props.verticalCompact),
+//   activeDrag: placeholder
+// });
+to  this.setState({ activeDrag: placeholder });
+
+*line 325
+// this.setState({
+//   layout: compact(layout, this.props.verticalCompact),
+//   activeDrag: placeholder+
+// });
+to  this.setState({ activeDrag: placeholder });
+
+
+after doing above changes run: npm run build
