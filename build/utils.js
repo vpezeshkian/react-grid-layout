@@ -248,36 +248,14 @@ function moveElement(layout, l, x, y, isUserAction) {
   // Short-circuit if nothing to do.
   if (l.y === y && l.x === x) return layout;
 
-  var movingUp = y && l.y > y;
   // This is quite a bit faster than extending the object
   if (typeof x === 'number') l.x = x;
   if (typeof y === 'number') l.y = y;
-  l.moved = true;
 
-  // If this collides with anything, move it.
-  // When doing this comparison, we have to sort the items we compare with
-  // to ensure, in the case of multiple collisions, that we're getting the
-  // nearest collision.
-  var sorted = sortLayoutItemsByRowCol(layout);
-  if (movingUp) sorted = sorted.reverse();
-  var collisions = getAllCollisions(sorted, l);
-
-  // Move each item that collides away from this element.
-  for (var _i7 = 0, len = collisions.length; _i7 < len; _i7++) {
-    var collision = collisions[_i7];
-    // console.log('resolving collision between', l.i, 'at', l.y, 'and', collision.i, 'at', collision.y);
-
-    // Short circuit so we can't infinite loop
-    if (collision.moved) continue;
-
-    // This makes it feel a bit more precise by waiting to swap for just a bit when moving up.
-    if (l.y > collision.y && l.y - collision.y > collision.h / 4) continue;
-
-    // Don't move static items - we have to move *this* element away
-    if (collision.static) {
-      layout = moveElementAwayFromCollision(layout, collision, l, isUserAction);
-    } else {
-      layout = moveElementAwayFromCollision(layout, l, collision, isUserAction);
+  for (var _i7 = 0; _i7 < layout.length; _i7++) {
+    if (layout[_i7].i === l.i) {
+      // replace in layout
+      layout[_i7] = l;
     }
   }
 

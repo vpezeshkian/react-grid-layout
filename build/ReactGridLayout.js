@@ -142,18 +142,19 @@ var ReactGridLayout = function (_React$Component) {
 
     // Create placeholder (display only)
     var placeholder = {
-      w: l.w, h: l.h, x: l.x, y: l.y, placeholder: true, i: i
+      w: l.w, h: l.h, x: x, y: y, placeholder: true, i: i
     };
 
     // Move the element to the dragged location.
-    layout = (0, _utils.moveElement)(layout, l, x, y, true /* isUserAction */);
+    // layout = moveElement(layout, l, x, y, true /* isUserAction */);
 
     this.props.onDrag(layout, oldDragItem, l, placeholder, e, node);
 
-    this.setState({
-      layout: (0, _utils.compact)(layout, this.props.verticalCompact),
-      activeDrag: placeholder
-    });
+    // this.setState({
+    //   layout: compact(layout, this.props.verticalCompact),
+    //   activeDrag: placeholder
+    // });
+    this.setState({ activeDrag: placeholder });
   };
 
   /**
@@ -181,7 +182,7 @@ var ReactGridLayout = function (_React$Component) {
     this.props.onDragStop(layout, oldDragItem, l, null, e, node);
 
     // Set state
-    var newLayout = (0, _utils.compact)(layout, this.props.verticalCompact);
+    var newLayout = layout; // compact(layout, this.props.verticalCompact);
     var oldLayout = this.state.oldLayout;
 
     this.setState({
@@ -239,10 +240,11 @@ var ReactGridLayout = function (_React$Component) {
     this.props.onResize(layout, oldResizeItem, l, placeholder, e, node);
 
     // Re-compact the layout and set the drag placeholder.
-    this.setState({
-      layout: (0, _utils.compact)(layout, this.props.verticalCompact),
-      activeDrag: placeholder
-    });
+    // this.setState({
+    //   layout: compact(layout, this.props.verticalCompact),
+    //   activeDrag: placeholder
+    // });
+    this.setState({ activeDrag: placeholder });
   };
 
   ReactGridLayout.prototype.onResizeStop = function onResizeStop(i, w, h, _ref6) {
@@ -257,7 +259,7 @@ var ReactGridLayout = function (_React$Component) {
     this.props.onResizeStop(layout, oldResizeItem, l, null, e, node);
 
     // Set state
-    var newLayout = (0, _utils.compact)(layout, this.props.verticalCompact);
+    var newLayout = layout; // compact(layout, this.props.verticalCompact);
     var oldLayout = this.state.oldLayout;
 
     this.setState({
@@ -515,7 +517,7 @@ ReactGridLayout.defaultProps = {
   isDraggable: true,
   isResizable: true,
   useCSSTransforms: true,
-  verticalCompact: true,
+  verticalCompact: false,
   onLayoutChange: noop,
   onDragStart: noop,
   onDrag: noop,
