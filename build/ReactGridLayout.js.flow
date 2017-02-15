@@ -238,18 +238,19 @@ export default class ReactGridLayout extends React.Component {
 
     // Create placeholder (display only)
     var placeholder = {
-      w: l.w, h: l.h, x: l.x, y: l.y, placeholder: true, i: i
+      w: l.w, h: l.h, x: x, y: y, placeholder: true, i: i
     };
 
     // Move the element to the dragged location.
-    layout = moveElement(layout, l, x, y, true /* isUserAction */);
+    // layout = moveElement(layout, l, x, y, true /* isUserAction */);
 
     this.props.onDrag(layout, oldDragItem, l, placeholder, e, node);
 
-    this.setState({
-      layout: compact(layout, this.props.verticalCompact),
-      activeDrag: placeholder
-    });
+    // this.setState({
+    //   layout: compact(layout, this.props.verticalCompact),
+    //   activeDrag: placeholder
+    // });
+    this.setState({ activeDrag: placeholder });
   }
 
   /**
@@ -321,10 +322,11 @@ export default class ReactGridLayout extends React.Component {
     this.props.onResize(layout, oldResizeItem, l, placeholder, e, node);
 
     // Re-compact the layout and set the drag placeholder.
-    this.setState({
-      layout: compact(layout, this.props.verticalCompact),
-      activeDrag: placeholder
-    });
+    // this.setState({
+    //   layout: compact(layout, this.props.verticalCompact),
+    //   activeDrag: placeholder
+    // });
+    this.setState({ activeDrag: placeholder });
   }
 
   onResizeStop(i:string, w:number, h:number, {e, node}: ResizeEvent) {
