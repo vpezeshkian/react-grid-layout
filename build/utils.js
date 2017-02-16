@@ -402,7 +402,7 @@ function synchronizeLayoutWithChildren(initialLayout, children, cols, verticalCo
 
   // Correct the layout.
   layout = correctBounds(layout, { cols: cols });
-  layout = compact(layout, verticalCompact);
+  // layout = compact(layout, verticalCompact);
 
   return layout;
 }
